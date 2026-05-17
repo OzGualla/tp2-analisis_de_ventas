@@ -9,6 +9,7 @@
 # ================================================================
 
 import csv
+import matplotlib.pyplot as plt
 
 # ----------------------------------------------------------------
 # CONFIGURACIÓN GENERAL
@@ -66,3 +67,28 @@ with open(ruta, "r", encoding="utf-8") as archivo:
 
 print(f"- Día con mayor venta: {mejor_dia} (${mejor_venta:,})")
 print("\n=== Análisis finalizado ===")
+
+# ----------------------------------------------------------------
+# BLOQUE 4: Generación del gráfico de evolución de ventas
+# Se exporta como PNG en /resultados para garantizar persistencia
+# del resultado más allá de la sesión de Google Colab.
+# ----------------------------------------------------------------
+fechas = []
+ventas = []
+
+with open(ruta, "r", encoding="utf-8") as archivo:
+    lector = csv.DictReader(archivo)
+    for fila in lector:
+        fechas.append(fila["fecha_venta"])
+        ventas.append(int(fila["ventas"]))
+
+plt.figure(figsize=(14, 5))
+plt.plot(fechas, ventas, color="steelblue", linewidth=1)
+plt.title("Evolución de Ventas Diarias - Tienda de Luminaria 2024")
+plt.xlabel("Fecha")
+plt.ylabel("Ventas ($)")
+plt.xticks(fechas[::30], rotation=45)
+plt.tight_layout()
+plt.savefig("resultados/grafico_ventas.png")
+plt.show()
+print("\n- Gráfico guardado en resultados/grafico_ventas.png")
