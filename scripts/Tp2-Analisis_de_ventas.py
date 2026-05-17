@@ -46,3 +46,23 @@ with open(ruta, "r", encoding="utf-8") as archivo:
         ventas_totales += int(fila["ventas"])
 
 print(f"- Ventas totales del período: ${ventas_totales:,}")
+
+# ----------------------------------------------------------------
+# BLOQUE 3: Identificación del día con mayor venta registrada
+# El dataset no contiene columna de producto, por lo que el análisis
+# se enfoca en la dimensión temporal como indicador de rendimiento.
+# Se recorre el archivo comparando cada registro contra el máximo.
+# ----------------------------------------------------------------
+mejor_dia = None
+mejor_venta = 0
+
+with open(ruta, "r", encoding="utf-8") as archivo:
+    lector = csv.DictReader(archivo)
+    for fila in lector:
+        venta_dia = int(fila["ventas"])
+        if venta_dia > mejor_venta:
+            mejor_venta = venta_dia
+            mejor_dia = fila["fecha_venta"]
+
+print(f"- Día con mayor venta: {mejor_dia} (${mejor_venta:,})")
+print("\n=== Análisis finalizado ===")
