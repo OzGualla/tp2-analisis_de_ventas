@@ -2,9 +2,9 @@
 """=== TP2 - Análisis de Ventas ===
 
 - Autor: Gualla Mariano
-- Rol actual: P-3 (Revisor y QA)
+- Rol actual: P-2 (Desarrollador)
 
-- Revisión: Mejora de documentación interna y legibilidad del código """
+"""
 
 # ================================================================
 
@@ -33,3 +33,16 @@ with open(ruta, "r", encoding="utf-8") as archivo:
 
 # Acumulador inicializado en 0 antes del cálculo del siguiente bloque
 ventas_totales = 0
+
+# ----------------------------------------------------------------
+# BLOQUE 2: Cálculo de ventas totales del período
+# csv.DictReader devuelve strings, por eso se convierte a int.
+# Se abre el archivo en un nuevo contexto para reiniciar el cursor.
+# ----------------------------------------------------------------
+print("\\n=== Indicadores del período ===")
+with open(ruta, "r", encoding="utf-8") as archivo:
+    lector = csv.DictReader(archivo)
+    for fila in lector:
+        ventas_totales += int(fila["ventas"])
+
+print(f"- Ventas totales del período: ${ventas_totales:,}")
