@@ -9,7 +9,10 @@
 # ================================================================
 
 import csv
+import matplotlib
+matplotlib.use('Agg')  # modo sin pantalla, guarda el archivo correctamente
 import matplotlib.pyplot as plt
+
 
 # ----------------------------------------------------------------
 # CONFIGURACIÓN GENERAL
@@ -73,6 +76,8 @@ print("\n=== Análisis finalizado ===")
 # Se exporta como PNG en /resultados para garantizar persistencia
 # del resultado más allá de la sesión de Google Colab.
 # ----------------------------------------------------------------
+
+ruta = "datos/ventas.csv"
 fechas = []
 ventas = []
 
@@ -90,5 +95,4 @@ plt.ylabel("Ventas ($)")
 plt.xticks(fechas[::30], rotation=45)
 plt.tight_layout()
 plt.savefig("resultados/grafico_ventas.png")
-plt.show()
-print("\n- Gráfico guardado en resultados/grafico_ventas.png")
+print("Gráfico guardado correctamente")
